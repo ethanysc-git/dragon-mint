@@ -7,6 +7,7 @@ import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import Head from "next/head";
 import Header from "../components/Header";
+import { AiFillGithub } from "react-icons/ai";
 
 const { chains, publicClient } = configureChains(
   [sepolia],
@@ -39,8 +40,15 @@ export default function App({ Component, pageProps }) {
         <Header />
         <Component {...pageProps} />
         <div className="bg-accent w-full h-full">
-          <div className="max-w-screen-xl mx-auto py-5 flex justify-between items-center text-light">
-            <p className="text-xs">WAGMI © 2024 |</p>
+          <div className="max-w-screen-xl mx-auto py-6 flex justify-between items-center text-light">
+            <p className="text-xs">WAGMI © 2024</p>
+            <a
+              href="https://github.com/ethanysc-git/dragon-mint"
+              target="_blank"
+            >
+              <AiFillGithub />
+            </a>
+
             <div className="flex items-center gap-10 mr-4"></div>
           </div>
         </div>

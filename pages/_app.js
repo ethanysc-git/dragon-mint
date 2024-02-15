@@ -8,6 +8,7 @@ import { publicProvider } from "wagmi/providers/public";
 import Head from "next/head";
 import Header from "../components/Header";
 import { AiFillGithub } from "react-icons/ai";
+import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 
 const { chains, publicClient } = configureChains(
   [sepolia],
@@ -27,6 +28,11 @@ const wagmiConfig = createConfig({
   publicClient,
 });
 
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  uri: process.env.NEXT_PUBLIC_SUBGRAPH_URL,
+});
+
 export default function App({ Component, pageProps }) {
   return (
     <WagmiConfig config={wagmiConfig}>
@@ -38,7 +44,9 @@ export default function App({ Component, pageProps }) {
           <link rel="icon" href="/2024 year of the dragon.png" />
         </Head>
         <Header />
-        <Component {...pageProps} />
+        <ApolloProvider client={client}>
+          <Component {...pageProps} />
+        </ApolloProvider>
         <div className="bg-accent w-full h-full">
           <div className="max-w-screen-xl mx-auto py-6 flex justify-between items-center text-light">
             <p className="text-xs">WAGMI © 2024</p>

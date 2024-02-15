@@ -26,6 +26,7 @@ module.exports = {
       backgroundImage: {
         heroImage: "url('/bg.png')",
         giftsImage: "url('/nft-gifts.png')",
+        shoppingCartImage: "url('/shopping-cart.png')",
       },
       keyframes: {
         animategradient: {

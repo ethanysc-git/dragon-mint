@@ -2,7 +2,6 @@ import * as React from "react";
 import { usePrepareContractWrite, useContractWrite } from "wagmi";
 
 export default function MintNFTForm(props) {
-  const [tokenId, setTokenId] = React.useState("");
   const { config } = usePrepareContractWrite({
     address: props.contractAddress,
     abi: [
@@ -18,6 +17,7 @@ export default function MintNFTForm(props) {
     args: ["ipfs://" + props.cid],
   });
   const { write } = useContractWrite(config);
+
   return (
     <div>
       <button

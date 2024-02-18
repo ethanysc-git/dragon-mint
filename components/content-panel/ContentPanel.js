@@ -19,10 +19,73 @@ import {
 } from "@chakra-ui/react";
 //
 export const ContentPanel = (props) => {
-  //
-  const { isConnected, address } = useAccount();
+  const { address, isConnected } = useAccount();
+
   const { openConnectModal } = useConnectModal();
-  const { loading, error, data: listedNfts } = useQuery(GET_ACTIVE_ITEMS);
+  // const { loading, error, data: listedNfts } = useQuery(GET_ACTIVE_ITEMS);
+  // const { loading, error, data: listedNfts } = props.listedNfts;
+  //[...,
+  // {
+  //   amount: '1',
+  //   token_id: '3',
+  //   token_address: '0x2bb634109eee5dc71602066f874da5abc27be9d8',
+  //   contract_type: 'ERC721',
+  //   owner_of: '0x1b1432102d127aaeddf9cd97dd744b7384625a72',
+  //   last_metadata_sync: null,
+  //   last_token_uri_sync: '2024-02-17T08:33:31.278Z',
+  //   metadata: null,
+  //   block_number: '5288505',
+  //   block_number_minted: '5288505',
+  //   name: 'UnitNft',
+  //   symbol: 'UNFT',
+  //   token_hash: 'c25bbbc8eb57bed4fb3ca029be82a532',
+  //   token_uri: 'ipfs://QmaXUPkqzBna8s3Azb3nkBdfzckvzgKErmbaJUG6jrXk8N',
+  //   minter_address: '0x1b1432102d127aaeddf9cd97dd744b7384625a72',
+  //   verified_collection: false,
+  //   possible_spam: false,
+  //   collection_logo: null,
+  //   collection_banner_image: null
+  // },
+  //...]
+  //
+  console.log;
+  let DATA = {
+    data: {
+      itemActives: [
+        {
+          id: "0x2bb634109eee5dc71602066f874da5abc27be9d800000000",
+          tokenId: "0",
+          //seller: "0x1b1432102d127aaeddf9cd97dd744b7384625a72",
+          buyer: "0x1b1432102d127aaeddf9cd97dd744b7384625a72",
+          nftAddress: "0x2bb634109eee5dc71602066f874da5abc27be9d8",
+          tokenUri: "ipfs://QmTHKFaNqUocBfdotjbDahwdmURjJcPwUuwxyn1sVMehjx",
+          //price: "100000000",
+        },
+        {
+          id: "0x2bb634109eee5dc71602066f874da5abc27be9d808000000",
+          tokenId: "8",
+          seller: "0x1b1432102d127aaeddf9cd97dd744b7384625a72",
+          buyer: "0x0000000000000000000000000000000000000000",
+          nftAddress: "0x2bb634109eee5dc71602066f874da5abc27be9d8",
+          tokenUri: "ipfs://QmTTAsMs7JnftogqEV9WYBNVK7YFzdbSNkDBEGi3HRWpRA",
+          price: "10000000000",
+        },
+        {
+          id: "0x2bb634109eee5dc71602066f874da5abc27be9d809000000",
+          tokenId: "9",
+          seller: "0x1b1432102d127aaeddf9cd97dd744b7384625a72",
+          buyer: "0x0000000000000000000000000000000000000000",
+          nftAddress: "0x2bb634109eee5dc71602066f874da5abc27be9d8",
+          tokenUri: "ipfs://QmTxzHzmtkUPNagx5mLiArNm2JAN1ZFbjqFYvphRFYWVYY",
+          price: "10000000000",
+        },
+      ],
+    },
+  };
+  //
+
+  //
+  const { loading, error, data: listedNfts } = DATA;
   //
   return (
     <div className="w-full m-1">
@@ -85,6 +148,8 @@ export const ContentPanel = (props) => {
                             seller={seller}
                             price={price}
                             cid={cid}
+                            marketplaceUI={false}
+                            profileUI={true}
                           />
                         )}
                       </Center>

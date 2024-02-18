@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
+import { useAccount } from "wagmi";
 import { parseEther, formatEther } from "viem";
 import CancelNFTButton from "@/components/CancelNFTButton";
 import BuyNFTButton from "@/components/BuyNFTButton";
@@ -25,7 +26,10 @@ import {
 } from "@chakra-ui/react";
 
 export default function NFTCard(props) {
+  const { address, isConnected } = useAccount();
   const [imageURI, setImageURI] = useState("");
+  const [marketplaceUI, setMarketplaceUI] = useState(props.marketplaceUI);
+  const [profileUI, setProfileUI] = useState(props.profileUI);
 
   async function updateUI() {
     console.log(`The TokenURI is ipfs://${props.cid}`);
@@ -56,7 +60,6 @@ export default function NFTCard(props) {
           </Center>
           <Stack mt="2" spacing="3">
             <Heading size="md">Token ID : {props.tokenId}</Heading>
-
             <div>
               <a
                 target="_blank"
@@ -68,46 +71,60 @@ export default function NFTCard(props) {
                 </Text>
               </a>
             </div>
-            <div>
-              <a
-                target="_blank"
-                rel="noreferrer noopenner"
-                href={`https://sepolia.etherscan.io/address/${props.seller}`}
-              >
-                <Text className="font-sans font-semibold underline underline-offset-1">
-                  NFT seller
+            {/* {collectionNameInput(<CreateNFTForm />)}
+             */}
+            {marketplaceUI && (
+              <div>
+                <a
+                  target="_blank"
+                  rel="noreferrer noopenner"
+                  href={`https://sepolia.etherscan.io/address/${props.seller}`}
+                >
+                  <Text className="font-sans font-semibold underline underline-offset-1">
+                    NFT seller
+                  </Text>
+                </a>
+              </div>
+            )}
+            {marketplaceUI ? (
+              <div>
+                <Text className="font-sans font-semibold">
+                  Sall price : {formatEther(props.price)}ETH
                 </Text>
-              </a>
-            </div>
-            <div>
-              <Text className="font-sans font-semibold">
-                Sall price : {formatEther(props.price)}ETH
-              </Text>
-            </div>
+              </div>
+            ) : (
+              <div></div>
+            )}
           </Stack>
         </CardBody>
         <Divider />
         <CardFooter>
           <ButtonGroup spacing="2">
-            <div>
-              <CancelNFTButton
-                contractAddress="0x1c92920ca2445C3c29A9CcC551152317219C61A6"
-                nftAddress={props.nftAddress}
-                tokenId={props.tokenId}
-                price={props.price}
-              />
-            </div>
-            <div>
-              <BuyNFTButton
-                contractAddress="0x1c92920ca2445C3c29A9CcC551152317219C61A6"
-                nftAddress={props.nftAddress}
-                tokenId={props.tokenId}
-                price={props.price}
-              />
-            </div>
-            <Button className="w-[150px] bg-accent text-black rounded-3xl py-2 px-4 hover:bg-secondary hover: text-black transition-all duration-300 ease-in-out">
-              Add to cart
-            </Button>
+            {profileUI && (
+              <div>
+                <CancelNFTButton
+                  contractAddress="0x1c92920ca2445C3c29A9CcC551152317219C61A6"
+                  nftAddress={props.nftAddress}
+                  tokenId={props.tokenId}
+                  price={props.price}
+                />
+              </div>
+            )}
+            {marketplaceUI && (
+              <div>
+                <BuyNFTButton
+                  contractAddress="0x1c92920ca2445C3c29A9CcC551152317219C61A6"
+                  nftAddress={props.nftAddress}
+                  tokenId={props.tokenId}
+                  price={props.price}
+                />
+              </div>
+            )}
+            {marketplaceUI && (
+              <Button className="w-[150px] bg-accent text-black rounded-3xl py-2 px-4 hover:bg-secondary hover: text-black transition-all duration-300 ease-in-out">
+                Add to cart
+              </Button>
+            )}
           </ButtonGroup>
         </CardFooter>
       </Card>

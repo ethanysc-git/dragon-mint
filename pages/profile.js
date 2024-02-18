@@ -1,68 +1,40 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ContentPanel } from "../components/content-panel/ContentPanel";
 import { Sidebar } from "../components/sidebar/Sidebar";
 
 export default function Profile() {
-  const [selectedProfile, setSelectedProfile] = useState(undefined);
+  const [selectedProfile, setSelectedProfile] = useState([]);
   const [userProfiles, setUserProfiles] = useState([]);
 
-  const data = [
-    {
-      firstName: "UnitNft (UNFT#0)",
-      lastName: "UNFT",
-      email: "UnitNft (UNFT#0)",
-      pid: "0x2Bb634109eee5dc71602066f874DA5ABC27be9D8",
+  let data = {
+    data: {
+      itemActives: [],
     },
-    {
-      firstName: "UnitNft (UNFT#1)",
-      lastName: "UNFT",
-      email: "UnitNft (UNFT#1)",
-      pid: "0x2Bb634109eee5dc71602066f874DA5ABC27be9D801",
-    },
-    {
-      firstName: "UnitNft (UNFT#2)",
-      lastName: "UNFT",
-      email: "UnitNft (UNFT#2)",
-      pid: "0x2Bb634109eee5dc71602066f874DA5ABC27be9D802",
-    },
-    {
-      firstName: "UnitNft (UNFT#3)",
-      lastName: "UNFT",
-      email: "UnitNft (UNFT#3)",
-      pid: "0x2Bb634109eee5dc71602066f874DA5ABC27be9D803",
-    },
-    {
-      firstName: "UnitNft (UNFT#4)",
-      lastName: "UNFT",
-      email: "UnitNft (UNFT#4)",
-      pid: "0x2Bb634109eee5dc71602066f874DA5ABC27be9D804",
-    },
-    {
-      firstName: "UnitNft (UNFT#5)",
-      lastName: "UNFT",
-      email: "UnitNft (UNFT#5)",
-      pid: "0x2Bb634109eee5dc71602066f874DA5ABC27be9D805",
-    },
-    {
-      firstName: "UnitNft (UNFT#6)",
-      lastName: "UNFT",
-      email: "UnitNft (UNFT#6)",
-      pid: "0x2Bb634109eee5dc71602066f874DA5ABC27be9D806",
-    },
-    {
-      firstName: "UnitNft (UNFT#7)",
-      lastName: "UNFT",
-      email: "UnitNft (UNFT#7)",
-      pid: "0x2Bb634109eee5dc71602066f874DA5ABC27be9D807",
-    },
-  ];
+  };
+
+  const originProfiles = useRef();
+  originProfiles.current = data;
 
   useEffect(() => {
-    if (userProfiles.length === 0) {
+    console.log("execute function in useEffect");
+    const fetchData = async () => {
+      const formData = new FormData();
+      const res = await fetch("/api/moralis/useEvmWalletNFTs", {
+        method: "POST",
+        body: formData,
+      });
+      data = await res.json();
+      data = data.result;
+      data = data.filter(
+        (d) => d.token_address == "0x2bb634109eee5dc71602066f874da5abc27be9d8"
+      );
+
       setUserProfiles(data);
       setSelectedProfile(data[0]);
-    }
-  });
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -75,10 +47,9 @@ export default function Profile() {
             profiles={userProfiles}
           />
           <ContentPanel
-            firstName="firstName"
-            lastName="lastName"
-            email="email"
-            pid="pid"
+            firstName="Just_"
+            lastName="Demo Data"
+            listedNfts={userProfiles}
           />
         </div>
       </main>

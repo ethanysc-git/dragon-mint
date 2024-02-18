@@ -16,7 +16,7 @@ export const Sidebar = ({ selectedProfile, setSelectedProfile, profiles }) => {
       <div className="bg-accent text-black py-2 px-2 ">
         <div className="flex place-items-center">
           <h2 className="flex-1 text-3xl text-gray-900 font-bold">
-            User NFT Collection
+            UnitNft Collection
           </h2>
           <span
             className="hover:cursor-pointer"
@@ -42,57 +42,6 @@ export const Sidebar = ({ selectedProfile, setSelectedProfile, profiles }) => {
         </div>
       </div>
 
-      {/* const data = [
-    {
-      firstName: "UnitNft (UNFT#0)",
-      lastName: "UNFT",
-      email: "UnitNft (UNFT#0)",
-      pid: "0x2Bb634109eee5dc71602066f874DA5ABC27be9D8",
-    },
-    {
-      firstName: "UnitNft (UNFT#1)",
-      lastName: "UNFT",
-      email: "UnitNft (UNFT#1)",
-      pid: "0x2Bb634109eee5dc71602066f874DA5ABC27be9D801",
-    },
-    {
-      firstName: "UnitNft (UNFT#2)",
-      lastName: "UNFT",
-      email: "UnitNft (UNFT#2)",
-      pid: "0x2Bb634109eee5dc71602066f874DA5ABC27be9D802",
-    },
-    {
-      firstName: "UnitNft (UNFT#3)",
-      lastName: "UNFT",
-      email: "UnitNft (UNFT#3)",
-      pid: "0x2Bb634109eee5dc71602066f874DA5ABC27be9D803",
-    },
-    {
-      firstName: "UnitNft (UNFT#4)",
-      lastName: "UNFT",
-      email: "UnitNft (UNFT#4)",
-      pid: "0x2Bb634109eee5dc71602066f874DA5ABC27be9D804",
-    },
-    {
-      firstName: "UnitNft (UNFT#5)",
-      lastName: "UNFT",
-      email: "UnitNft (UNFT#5)",
-      pid: "0x2Bb634109eee5dc71602066f874DA5ABC27be9D805",
-    },
-    {
-      firstName: "UnitNft (UNFT#6)",
-      lastName: "UNFT",
-      email: "UnitNft (UNFT#6)",
-      pid: "0x2Bb634109eee5dc71602066f874DA5ABC27be9D806",
-    },
-    {
-      firstName: "UnitNft (UNFT#7)",
-      lastName: "UNFT",
-      email: "UnitNft (UNFT#7)",
-      pid: "0x2Bb634109eee5dc71602066f874DA5ABC27be9D807",
-    },
-  ]; */}
-
       {profiles.map((profile, idx) => {
         return (
           <UserRow
@@ -100,7 +49,7 @@ export const Sidebar = ({ selectedProfile, setSelectedProfile, profiles }) => {
             index={idx}
             key={idx}
             setSelectedProfile={setSelectedProfile}
-            isRowSelected={profile.pid === selectedProfile?.pid}
+            isRowSelected={profile.token_hash === selectedProfile?.token_hash}
           />
         );
       })}

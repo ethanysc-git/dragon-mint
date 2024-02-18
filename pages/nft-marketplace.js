@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from "react";
 import GET_ACTIVE_ITEMS from "@/pages/api/subgraphQueries";
 import { useQuery } from "@apollo/client";
 import { useAccount, useWaitForTransaction } from "wagmi";
@@ -9,6 +10,14 @@ export default function NFTMarketplace() {
   const { isConnected, address } = useAccount();
   const { openConnectModal } = useConnectModal();
   const { loading, error, data: listedNfts } = useQuery(GET_ACTIVE_ITEMS);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log(`Data : ${listedNfts}`);
+    };
+    fetchData();
+  }, []);
+
   return (
     <>
       <main className="w-full min-h-screen m-auto bg-heroImage bg-cover flex flex-col justify-center items-center">
@@ -36,6 +45,8 @@ export default function NFTMarketplace() {
                                   seller={seller}
                                   price={price}
                                   cid={cid}
+                                  marketplaceUI={true}
+                                  profileUI={false}
                                 />
                               )}
                             </Center>

@@ -1,8 +1,8 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { parseEther, formatEther } from "viem";
-import { usePrepareContractWrite, useContractWrite } from "wagmi";
-import BuyNFTForm from "@/components/BuyNFTForm";
+import CancelNFTButton from "@/components/CancelNFTButton";
+import BuyNFTButton from "@/components/BuyNFTButton";
 import {
   Card,
   CardHeader,
@@ -23,6 +23,7 @@ import {
   ExternalLinkIcon,
   Center,
 } from "@chakra-ui/react";
+
 export default function NFTCard(props) {
   const [imageURI, setImageURI] = useState("");
 
@@ -42,65 +43,74 @@ export default function NFTCard(props) {
   });
 
   return (
-    <>
-      <div>
-        <Card maxW="sm" className="h-full w-full bg-heroImage m-2">
-          <CardBody>
-            <Center>
-              {imageURI ? (
-                <Image src={imageURI} boxSize="250px" borderRadius="lg" />
-              ) : (
-                <div>Loading...</div>
-              )}
-            </Center>
-            <Stack mt="2" spacing="3">
-              <Heading size="md">Token ID : {props.tokenId}</Heading>
+    <div>
+      <Card maxW="sm" className="h-full w-full bg-heroImage m-2">
+        <CardBody>
+          <Center>
+            {imageURI ? (
+              <Image src={imageURI} boxSize="250px" />
+            ) : (
+              //borderRadius="lg"
+              <div>Loading...</div>
+            )}
+          </Center>
+          <Stack mt="2" spacing="3">
+            <Heading size="md">Token ID : {props.tokenId}</Heading>
 
-              <div>
-                <a
-                  target="_blank"
-                  rel="noreferrer noopenner"
-                  href={`https://sepolia.etherscan.io/address/${props.nftAddress}`}
-                >
-                  <Text className="font-sans font-semibold underline underline-offset-1">
-                    NFT Address
-                  </Text>
-                </a>
-              </div>
-              <div>
-                <a
-                  target="_blank"
-                  rel="noreferrer noopenner"
-                  href={`https://sepolia.etherscan.io/address/${props.seller}`}
-                >
-                  <Text className="font-sans font-semibold underline underline-offset-1">
-                    NFT seller
-                  </Text>
-                </a>
-              </div>
-              <div>
-                <Text className="font-sans font-semibold">
-                  Sall price : {formatEther(props.price)}ETH
+            <div>
+              <a
+                target="_blank"
+                rel="noreferrer noopenner"
+                href={`https://sepolia.etherscan.io/address/${props.nftAddress}`}
+              >
+                <Text className="font-sans font-semibold underline underline-offset-1">
+                  NFT Address
                 </Text>
-              </div>
-            </Stack>
-          </CardBody>
-          <Divider />
-          <CardFooter>
-            <ButtonGroup spacing="2">
-              <BuyNFTForm
+              </a>
+            </div>
+            <div>
+              <a
+                target="_blank"
+                rel="noreferrer noopenner"
+                href={`https://sepolia.etherscan.io/address/${props.seller}`}
+              >
+                <Text className="font-sans font-semibold underline underline-offset-1">
+                  NFT seller
+                </Text>
+              </a>
+            </div>
+            <div>
+              <Text className="font-sans font-semibold">
+                Sall price : {formatEther(props.price)}ETH
+              </Text>
+            </div>
+          </Stack>
+        </CardBody>
+        <Divider />
+        <CardFooter>
+          <ButtonGroup spacing="2">
+            <div>
+              <CancelNFTButton
                 contractAddress="0x1c92920ca2445C3c29A9CcC551152317219C61A6"
                 nftAddress={props.nftAddress}
                 tokenId={props.tokenId}
                 price={props.price}
               />
-              <Button className="w-[150px] bg-accent text-black rounded-3xl py-2 px-4 hover:bg-secondary hover: text-black transition-all duration-300 ease-in-out">
-                Add to cart
-              </Button>
-            </ButtonGroup>
-          </CardFooter>
-        </Card>
-      </div>
-    </>
+            </div>
+            <div>
+              <BuyNFTButton
+                contractAddress="0x1c92920ca2445C3c29A9CcC551152317219C61A6"
+                nftAddress={props.nftAddress}
+                tokenId={props.tokenId}
+                price={props.price}
+              />
+            </div>
+            <Button className="w-[150px] bg-accent text-black rounded-3xl py-2 px-4 hover:bg-secondary hover: text-black transition-all duration-300 ease-in-out">
+              Add to cart
+            </Button>
+          </ButtonGroup>
+        </CardFooter>
+      </Card>
+    </div>
   );
 }

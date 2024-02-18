@@ -44,6 +44,18 @@
     @apply font-telegraf font-bold ;
   }
 
+  .react-lock-screen__ui {
+    width: 300px;
+    position: fixed;
+    border: 4px solid #333;
+    background: #fff;
+    text-align: center;
+    padding: 16px;
+    border-radius: 4px;
+    top: calc(39% - 152px / 2);
+    left: calc(49% - 300px / 2);
+  }
+
 }
 @tailwind components;
 @tailwind utilities;

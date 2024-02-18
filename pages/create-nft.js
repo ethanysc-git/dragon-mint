@@ -10,6 +10,7 @@ import { Field, Form, Formik } from "formik";
 import { useEffect, useState, useRef } from "react";
 import NFTBox from "@/components/NFTBox";
 import CreateNFTForm from "@/components/CreateNFTForm";
+// import WalletNFTCollection from "@/pages/api/moralis/useEvmWalletNFTs";
 
 export default function CreateNFT() {
   const [file, setFile] = useState("");
@@ -69,6 +70,22 @@ export default function CreateNFT() {
     return error;
   }
 
+  const useEvmWalletNFTs = async () => {
+    try {
+      const formData = new FormData();
+      const res = await fetch("/api/moralis/useEvmWalletNFTs", {
+        method: "POST",
+        body: formData,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const handleWalletNFTs = (e) => {
+    useEvmWalletNFTs();
+  };
+
   return (
     <>
       <main className="w-full min-h-screen m-auto bg-heroImage bg-cover bg-center flex flex-col justify-center items-center">
@@ -77,6 +94,14 @@ export default function CreateNFT() {
         </h2>
         <div className="h-full w-full max-w-screen-xl min-h-full my-8 mx-auto flex justify-center items-center gap-1">
           <div className="text-center bg-light rounded-lg w-full flex flex-col justify-center items-center p-2 gap-4 h-full">
+            <div>
+              <button
+                onClick={handleWalletNFTs}
+                className="w-[120px] bg-secondary text-black rounded-2xl py-2 px-3 hover:bg-accent hover: text-black transition-all duration-300 ease-in-out"
+              >
+                handleWalletNFTs
+              </button>
+            </div>
             <div className="h-full max-w-screen-xl  ">
               <Formik
                 initialValues={{
@@ -248,6 +273,7 @@ export default function CreateNFT() {
                                   {uploading ? "Uploading..." : "Upload"}
                                 </button>
                               </div>
+
                               <FormErrorMessage>
                                 {form.errors.collectionArtwork}
                               </FormErrorMessage>

@@ -13,7 +13,6 @@ import {
   Button,
   Stack,
 } from "@chakra-ui/react";
-import { EmailIcon, ArrowForwardIcon } from "react-icons/fa";
 
 export default function Header() {
   const imageStyle = {
@@ -27,8 +26,8 @@ export default function Header() {
           className="float-left"
           src="/2024 year of the dragon.png"
           alt="2024 year of the dragon logo"
-          height={80}
-          width={80}
+          height={100}
+          width={100}
         />
         <Link className="justify-between items-center " as={NextLink} href="/">
           <h1 className="pt-6 px-6 font-bold text-3xl float-left">
@@ -59,18 +58,20 @@ export default function Header() {
       </div>
       <div className="flex-none gap-4 items-center">
         <Stack direction="row" spacing={10}>
-          <Button>
-            <Image
-              className="float-left"
-              borderRadius="full"
-              src="/profile.png"
-              alt="profile logo"
-              height={60}
-              width={60}
-              style={imageStyle}
-            />
-          </Button>
-          <Button>
+          <NextLink href="/profile" passHref>
+            <Button>
+              <Image
+                className="float-left"
+                borderdadius="full"
+                src="/profile.png"
+                alt="profile logo"
+                height={60}
+                width={60}
+                style={imageStyle}
+              />
+            </Button>
+          </NextLink>
+          <Button onClick={() => alert("openCartModal")}>
             <Image
               className="float-left"
               src="/shopping-cart.png"

@@ -1,9 +1,6 @@
-import * as React from "react";
-// import { ethers } from "ethers";
-import { useAccount, useConnect, useEnsName } from "wagmi";
-import { usePrepareContractWrite, useContractWrite } from "wagmi";
+import { useAccount, usePrepareContractWrite, useContractWrite } from "wagmi";
 
-export default function BuyNFTForm(props) {
+export default function BuyNFTButton(props) {
   const { address, isConnected } = useAccount();
   const { config } = usePrepareContractWrite({
     address: props.contractAddress,
@@ -27,15 +24,11 @@ export default function BuyNFTForm(props) {
   const { write } = useContractWrite(config);
 
   return (
-    <>
-      <div>
-        <button
-          onClick={() => write({})}
-          className="w-[150px] bg-accent text-black rounded-3xl py-2 px-4 hover:bg-secondary hover: text-black transition-all duration-300 ease-in-out"
-        >
-          Buy now
-        </button>
-      </div>
-    </>
+    <button
+      onClick={() => write({})}
+      className="w-[150px] bg-accent text-black rounded-3xl py-2 px-4 hover:bg-secondary hover: text-black transition-all duration-300 ease-in-out"
+    >
+      Buy now
+    </button>
   );
 }

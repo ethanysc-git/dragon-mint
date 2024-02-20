@@ -30,6 +30,7 @@ export default function NFTCard(props) {
   const [imageURI, setImageURI] = useState("");
   const [marketplaceUI, setMarketplaceUI] = useState(props.marketplaceUI);
   const [profileUI, setProfileUI] = useState(props.profileUI);
+  const [listingUI, setListingUI] = useState(false);
 
   async function updateUI() {
     console.log(`The TokenURI is ipfs://${props.cid}`);
@@ -39,6 +40,9 @@ export default function NFTCard(props) {
       const imageURI = tokenURIResponse.image;
       const imageURIURL = imageURI.replace("ipfs://", "https://ipfs.io/ipfs/");
       setImageURI(imageURIURL);
+    }
+    if (props.price == "0") {
+      setListingUI(true);
     }
   }
 
@@ -100,7 +104,15 @@ export default function NFTCard(props) {
         <Divider />
         <CardFooter>
           <ButtonGroup spacing="2">
-            {profileUI && (
+            {listingUI && (
+              <Button
+                onClick={() => alert("listingItemModalOpen")}
+                className="w-[150px] bg-accent text-black rounded-3xl py-2 px-4 hover:bg-secondary hover: text-black transition-all duration-300 ease-in-out"
+              >
+                Listing
+              </Button>
+            )}
+            {profileUI && !listingUI && (
               <div>
                 <CancelNFTButton
                   contractAddress="0x1c92920ca2445C3c29A9CcC551152317219C61A6"
@@ -121,7 +133,10 @@ export default function NFTCard(props) {
               </div>
             )}
             {marketplaceUI && (
-              <Button className="w-[150px] bg-accent text-black rounded-3xl py-2 px-4 hover:bg-secondary hover: text-black transition-all duration-300 ease-in-out">
+              <Button
+                onClick={() => alert("addCartModalOpen")}
+                className="w-[150px] bg-accent text-black rounded-3xl py-2 px-4 hover:bg-secondary hover: text-black transition-all duration-300 ease-in-out"
+              >
                 Add to cart
               </Button>
             )}

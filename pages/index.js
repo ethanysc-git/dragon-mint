@@ -47,9 +47,11 @@ export default function Home() {
 
   const loadRecent = async () => {
     try {
-      const res = await fetch("/api/files");
-      const json = await res.json();
-      setCid(json.ipfs_pin_hash);
+      if (address == "0x1B1432102D127AaedDf9cD97dd744B7384625a72") {
+        const res = await fetch("/api/files");
+        const json = await res.json();
+        setCid(json.ipfs_pin_hash);
+      }
     } catch (e) {
       console.log(e);
       alert("trouble loading files");
@@ -78,13 +80,15 @@ export default function Home() {
                   onChange={handleChange}
                   style={{ display: "none" }}
                 />
+
                 <div>
-                  <button
+                  {/* <button
                     onClick={loadRecent}
                     className="mr-10 w-[150px] bg-secondary text-black border-2 rounded-3xl py-2 px-4 hover:bg-accent hover: text-black transition-all duration-300 ease-in-out"
                   >
                     Load recent
-                  </button>
+                  </button> */}
+
                   <button
                     disabled={uploading}
                     onClick={() => inputFile.current.click()}

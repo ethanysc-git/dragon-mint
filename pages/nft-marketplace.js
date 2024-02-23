@@ -20,7 +20,7 @@ export default function NFTMarketplace() {
 
   return (
     <>
-      <main className="w-full min-h-screen m-auto bg-heroImage bg-cover flex flex-col justify-center items-center">
+      <main className="w-full min-h-screen m-auto bg-[url('~/public/lightbluespray.png'),_url('~/public/bg.png')] bg-cover flex flex-col justify-center items-center">
         <h1 className="font-bold text-3xl float-left mt-20">NFT Marketplace</h1>
         <div className="h-full w-full max-w-screen-xl min-h-full my-8 mx-auto flex justify-center items-center gap-1">
           <div className="text-center rounded-lg w-full flex flex-col justify-center items-center p-2 gap-4 h-full">

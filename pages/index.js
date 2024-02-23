@@ -15,6 +15,7 @@ import TransferNFTForm from "@/components/TransferNFTForm";
 import NFTBox from "@/components/NFTBox";
 
 export default function Home() {
+  const { address, isConnected } = useAccount();
   const [file, setFile] = useState("");
   const [cid, setCid] = useState("");
   const [uploading, setUploading] = useState(false);
@@ -47,7 +48,10 @@ export default function Home() {
 
   const loadRecent = async () => {
     try {
-      if (address == "0x1B1432102D127AaedDf9cD97dd744B7384625a72") {
+      if (
+        isConnected &&
+        address == "0x1B1432102D127AaedDf9cD97dd744B7384625a72"
+      ) {
         const res = await fetch("/api/files");
         const json = await res.json();
         setCid(json.ipfs_pin_hash);
@@ -58,12 +62,10 @@ export default function Home() {
     }
   };
 
-  const { address, isConnected } = useAccount();
-
   return (
     <>
-      <main className="w-full min-h-screen m-auto bg-heroImage bg-cover bg-center flex flex-col justify-center items-center">
-        <div className="w-full h-full m-auto bg-heroImage bg-cover bg-center flex flex-col justify-center items-center">
+      <main className="w-full min-h-screen m-auto  bg-[url('~/public/bg.png'),_url('~/public/splashedwater.png')] bg-cover bg-center flex flex-col justify-center items-center">
+        <div className="w-full h-full m-auto bg-splashedwater bg-cover bg-center flex flex-col justify-center items-center">
           <div className="h-full max-w-screen-xl">
             <div className="h-full w-full m-auto flex justify-center items-center gap-8">
               <div className="w-1/2 flex flex-col gap-6">
@@ -115,9 +117,9 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="h-full w-full bg-secondary">
+          <div className="h-full w-full bg-splashedwater">
             <div className="max-w-screen-xl min-h-full my-8 mx-auto flex justify-center items-center gap-8">
-              <div className="text-center bg-light rounded-lg w-full flex flex-col justify-center items-center p-2 gap-4 h-[475px]">
+              <div className="text-center bg-splashedwater rounded-lg w-full flex flex-col justify-center items-center p-2 gap-4 h-[475px]">
                 <Image
                   src="/gift.png"
                   alt="NFT Gift Airdrop"
@@ -140,7 +142,7 @@ export default function Home() {
                   <TransferNFTForm contractAddress="0x2Bb634109eee5dc71602066f874DA5ABC27be9D8" />
                 </div>
               </div>
-              <div className="text-center bg-light rounded-lg w-full flex flex-col justify-center items-center p-2 gap-4 h-[475px]">
+              <div className="text-center bg-splashedwater rounded-lg w-full flex flex-col justify-center items-center p-2 gap-4 h-[475px]">
                 <Image
                   src="/golden shovel.png"
                   alt="Golden Shovel"

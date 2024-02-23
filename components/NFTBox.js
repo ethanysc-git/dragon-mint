@@ -26,6 +26,7 @@ export default function NFTBox({ cid }) {
           <Image
             className="float-left"
             loader={() => imageURI}
+            unoptimized={true}
             src={imageURI}
             height={60}
             width={60}

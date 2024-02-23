@@ -13,7 +13,7 @@ export const Sidebar = ({ selectedProfile, setSelectedProfile, profiles }) => {
 
   return (
     <div className={"w-1/2 max-w-md max-h-[calc(100vh-4rem)] overflow-auto"}>
-      <div className="bg-accent text-black py-2 px-2 ">
+      <div className="bg-splashedwater text-black py-2 px-2 ">
         <div className="flex place-items-center">
           <h2 className="flex-1 text-3xl text-gray-900 font-bold">
             UnitNft Collection

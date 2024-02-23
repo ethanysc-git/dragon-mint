@@ -71,14 +71,14 @@ export default function CreateNFT() {
 
   return (
     <>
-      <main className="w-full min-h-screen m-auto bg-heroImage bg-cover bg-center flex flex-col justify-center items-center">
+      <main className="w-full min-h-screen m-auto bg-[url('~/public/splashedwater.png'),_url('~/public/bg.png')] bg-cover bg-center flex flex-col justify-center items-center">
         <h2 className="font-telegraf font-bold text-3xl">
           Generate your own NFT Collection
         </h2>
         <div className="h-full w-full max-w-screen-xl min-h-full my-8 mx-auto flex justify-center items-center gap-1">
-          <div className="text-center bg-light rounded-lg w-full flex flex-col justify-center items-center p-2 gap-4 h-full">
+          <div className="text-center rounded-lg w-full flex flex-col justify-center items-center p-2 gap-4 h-full">
             <div></div>
-            <div className="h-full max-w-screen-xl  ">
+            <div className="h-full  max-w-screen-xl  ">
               <Formik
                 initialValues={{
                   collectionName: "",

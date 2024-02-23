@@ -38,7 +38,7 @@ export default function Profile() {
 
   return (
     <>
-      <main className="w-full min-h-screen m-auto bg-heroImage bg-cover flex flex-col justify-center">
+      <main className="w-full min-h-screen m-auto bg-[url('~/public/splashedwater.png'),_url('~/public/bg.png')] bg-cover flex flex-col justify-center">
         <div className="flex min-h-[calc(100vh-4rem)]">
           <Sidebar
             className="float-left"
